@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://3evq6k5mu3m0"]
+[gd_scene load_steps=11 format=4 uid="uid://3evq6k5mu3m0"]
 
 [ext_resource type="Texture2D" uid="uid://8giwavdux2te" path="res://assets/background.png" id="1_5qpg1"]
 [ext_resource type="Texture2D" uid="uid://bnvx21q3aidju" path="res://assets/ice_block.png" id="2_y5rs1"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://b84qrvnq8tltn" path="res://assets/scenery_2.png" id="5_slp24"]
 [ext_resource type="Texture2D" uid="uid://2at35a7bnkh5" path="res://assets/scenery_3.png" id="6_ru1km"]
 [ext_resource type="PackedScene" uid="uid://oudn3v8jkfua" path="res://player.tscn" id="6_slp24"]
-[ext_resource type="PackedScene" uid="uid://cx3s4vdm6tbwe" path="res://ice_block.tscn" id="8_j5e5f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5qpg1"]
 texture = ExtResource("2_y5rs1")
@@ -28,10 +27,6 @@ sources/0 = SubResource("TileSetAtlasSource_5qpg1")
 sources/1 = SubResource("TileSetAtlasSource_slp24")
 
 [node name="FirstScene" type="Node2D"]
-
-[node name="iceblock" parent="." instance=ExtResource("8_j5e5f")]
-position = Vector2(111, 192)
-scale = Vector2(1.2, 1.2)
 
 [node name="PlayerNode" parent="." instance=ExtResource("6_slp24")]
 scale = Vector2(2, 2)
@@ -98,7 +93,6 @@ texture_filter = 1
 tile_map_data = PackedByteArray("AAARABEAAQAAAAAAAAAQABEAAQAAAAAAAAAPABEAAQAAAAAAAAAOABEAAQAAAAAAAAANABEAAQAAAAAAAAAMABEAAQAAAAAAAAALABEAAQAAAAAAAAAKABEAAQAAAAAAAAAJABEAAQAAAAAAAAAIABEAAQAAAAAAAAAHABEAAQAAAAAAAAAGABEAAQAAAAAAAAAFABEAAQAAAAAAAAAEABEAAQAAAAAAAAADABEAAQAAAAAAAAACABEAAQAAAAAAAAABABEAAQAAAAAAAAAAABEAAQAAAAAAAAAAABAAAQAAAAAAAAAAAA8AAQAAAAAAAAAAAA4AAQAAAAAAAAAAAA0AAQAAAAAAAAAAAAwAAQAAAAAAAAAAAAsAAQAAAAAAAAAAAAoAAQAAAAAAAAAAAAkAAQAAAAAAAAAAAAgAAQAAAAAAAAAAAAcAAQAAAAAAAAAAAAYAAQAAAAAAAAAAAAUAAQAAAAAAAAAAAAQAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAIAAAAAQAAAAAAAAAJAAAAAQAAAAAAAAAKAAAAAQAAAAAAAAALAAAAAQAAAAAAAAAMAAAAAQAAAAAAAAANAAAAAQAAAAAAAAAOAAAAAQAAAAAAAAAPAAAAAQAAAAAAAAAQAAAAAQAAAAAAAAARAAAAAQAAAAAAAAARAAEAAQAAAAAAAAARAAIAAQAAAAAAAAARAAMAAQAAAAAAAAARAAQAAQAAAAAAAAARAAUAAQAAAAAAAAARAAYAAQAAAAAAAAARAAcAAQAAAAAAAAARAAgAAQAAAAAAAAARAAkAAQAAAAAAAAARAAoAAQAAAAAAAAARAAsAAQAAAAAAAAARAAwAAQAAAAAAAAARAA0AAQAAAAAAAAARAA4AAQAAAAAAAAARAA8AAQAAAAAAAAARABAAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_i86av")
 rendering_quadrant_size = 32
-collision_visibility_mode = 1
 physics_quadrant_size = 32
 
 [connection signal="animation_finished" from="PlayerNode/Player/player_sprite" to="PlayerNode/Player" method="_on_player_sprite_animation_finished"]
