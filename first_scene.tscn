@@ -32,6 +32,11 @@ sources/1 = SubResource("TileSetAtlasSource_slp24")
 [node name="PlayerNode" parent="." instance=ExtResource("6_slp24")]
 scale = Vector2(2, 2)
 
+[node name="player_sprite" parent="PlayerNode/Player" index="0"]
+animation = &"idle_down"
+frame = 0
+frame_progress = 0.0
+
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -2
 texture_filter = 1
