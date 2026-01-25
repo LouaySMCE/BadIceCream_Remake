@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://c52smbdfiooj5"]
+
+[ext_resource type="Texture2D" uid="uid://ym05846i1o2n" path="res://assets/ice_blockSMALL.png" id="1_u58vv"]
+
+[sub_resource type="GDScript" id="GDScript_u58vv"]
+resource_name = "iceBlock"
+script/source = "extends Sprite2D
+@onready var iceBlock: Sprite2D = $\".\"
+
+func _ready() -> void:
+	var tween = get_tree().create_tween()
+	tween.tween_property(iceBlock, \"scale\", Vector2(2,2),0.3)
+
+
+	
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u58vv"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_u58vv")
+script = SubResource("GDScript_u58vv")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
+scale = Vector2(0.8364992, 0.81803113)
+shape = SubResource("RectangleShape2D_u58vv")

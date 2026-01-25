@@ -16,8 +16,18 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("fireSnow") and state != PlayerState.BLOW:
 		state = PlayerState.BLOW                    
-		is_firing_ice = true                       
-		fireIceDown()                              
+		is_firing_ice = true
+		# fire ice depends on directions:
+		match facing_direction:
+			Facing.DOWN:
+				fireIceDown()
+			Facing.UP:
+				fireIceUP()
+			Facing.RIGHT:
+				fireIceRight()
+			Facing.LEFT:
+				fireIceLeft()
+		
 		update_animation()                         
 		return                                    
 		
@@ -69,7 +79,11 @@ func update_animation():
 				Facing.RIGHT: $player_sprite.play("walk_right")  
 
 		PlayerState.BLOW:
-				$player_sprite.play("blowing_down")                 
+			match facing_direction:
+				Facing.DOWN:  $player_sprite.play("blowing_down")
+				Facing.UP:    $player_sprite.play("blowing_up")
+				Facing.LEFT:  $player_sprite.play("blowing_left")
+				Facing.RIGHT: $player_sprite.play("blowing_right")                
 
 
 func fireIceDown():  
@@ -97,5 +111,86 @@ func fireIceDown():
 
 	is_firing_ice = false
 	state = PlayerState.IDLE                      
-	update_animation()                            
+	update_animation()
+
+func fireIceUP():
+	if facing_direction != Facing.UP:
+		state = PlayerState.IDLE
+		return
+
+	var start_cell: Vector2i = ice_layer.local_to_map(ice_layer.to_local(global_position))
+
+	var current_cell = start_cell + Vector2i(0, -1)
+
+	while true:
+		if not ice_layer.get_used_rect().has_point(current_cell):
+			break
+		if ice_layer.get_cell_source_id(current_cell) != -1:
+			break
+
+		var fakeIce = iceBlock0.instantiate()
+		var world_pos = ice_layer.map_to_local(current_cell)
+		fakeIce.global_position = ice_layer.to_global(world_pos)
+		get_tree().current_scene.add_child(fakeIce)
+
+		await get_tree().create_timer(0.1).timeout
+		current_cell += Vector2i(0, -1)
+
+	is_firing_ice = false
+	state = PlayerState.IDLE
+	update_animation()
+
+func fireIceRight():
+	if facing_direction != Facing.RIGHT:
+		state = PlayerState.IDLE
+		return
+
+	var start_cell: Vector2i = ice_layer.local_to_map(ice_layer.to_local(global_position))
+
+	var current_cell = start_cell + Vector2i(1, 0)
+
+	while true:
+		if not ice_layer.get_used_rect().has_point(current_cell):
+			break
+		if ice_layer.get_cell_source_id(current_cell) != -1:
+			break
+
+		var fakeIce = iceBlock0.instantiate()
+		var world_pos = ice_layer.map_to_local(current_cell)
+		fakeIce.global_position = ice_layer.to_global(world_pos)
+		get_tree().current_scene.add_child(fakeIce)
+
+		await get_tree().create_timer(0.1).timeout
+		current_cell += Vector2i(1, 0)
+
+	is_firing_ice = false
+	state = PlayerState.IDLE
+	update_animation()  	
+
+func fireIceLeft():
+	if facing_direction != Facing.LEFT:
+		state = PlayerState.IDLE
+		return
+
+	var start_cell: Vector2i = ice_layer.local_to_map(ice_layer.to_local(global_position))
+
+	var current_cell = start_cell + Vector2i(-1, 0)
+
+	while true:
+		if not ice_layer.get_used_rect().has_point(current_cell):
+			break
+		if ice_layer.get_cell_source_id(current_cell) != -1:
+			break
+
+		var fakeIce = iceBlock0.instantiate()
+		var world_pos = ice_layer.map_to_local(current_cell)
+		fakeIce.global_position = ice_layer.to_global(world_pos)
+		get_tree().current_scene.add_child(fakeIce)
+
+		await get_tree().create_timer(0.1).timeout
+		current_cell += Vector2i(-1, 0)
+
+	is_firing_ice = false
+	state = PlayerState.IDLE
+	update_animation()  	
 	

@@ -33,7 +33,7 @@ sources/1 = SubResource("TileSetAtlasSource_slp24")
 scale = Vector2(2, 2)
 
 [node name="player_sprite" parent="PlayerNode/Player" index="0"]
-animation = &"idle_down"
+animation = &"blowing_up"
 frame = 0
 frame_progress = 0.0
 
@@ -103,6 +103,7 @@ z_index = -1
 position = Vector2(-64, 32)
 
 [node name="Sprite2D" parent="ice_block" index="0"]
+visible = false
 position = Vector2(275, 53)
 
 [connection signal="animation_finished" from="PlayerNode/Player/player_sprite" to="PlayerNode/Player" method="_on_player_sprite_animation_finished"]
