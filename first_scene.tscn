@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://3evq6k5mu3m0"]
+[gd_scene load_steps=12 format=4 uid="uid://3evq6k5mu3m0"]
 
 [ext_resource type="Texture2D" uid="uid://8giwavdux2te" path="res://assets/background.png" id="1_5qpg1"]
 [ext_resource type="Texture2D" uid="uid://bnvx21q3aidju" path="res://assets/ice_block.png" id="2_y5rs1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b84qrvnq8tltn" path="res://assets/scenery_2.png" id="5_slp24"]
 [ext_resource type="Texture2D" uid="uid://2at35a7bnkh5" path="res://assets/scenery_3.png" id="6_ru1km"]
 [ext_resource type="PackedScene" uid="uid://oudn3v8jkfua" path="res://player.tscn" id="6_slp24"]
+[ext_resource type="PackedScene" uid="uid://c52smbdfiooj5" path="res://ice_block.tscn" id="8_j5e5f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5qpg1"]
 texture = ExtResource("2_y5rs1")
@@ -30,9 +31,6 @@ sources/1 = SubResource("TileSetAtlasSource_slp24")
 
 [node name="PlayerNode" parent="." instance=ExtResource("6_slp24")]
 scale = Vector2(2, 2)
-
-[node name="player_sprite" parent="PlayerNode/Player" index="0"]
-frame_progress = 0.0
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -2
@@ -95,7 +93,15 @@ tile_set = SubResource("TileSet_i86av")
 rendering_quadrant_size = 32
 physics_quadrant_size = 32
 
+[node name="ice_block" parent="." instance=ExtResource("8_j5e5f")]
+z_index = -1
+position = Vector2(-64, 32)
+
+[node name="Sprite2D" parent="ice_block" index="0"]
+position = Vector2(275, 53)
+
 [connection signal="animation_finished" from="PlayerNode/Player/player_sprite" to="PlayerNode/Player" method="_on_player_sprite_animation_finished"]
 
 [editable path="PlayerNode"]
 [editable path="sceneries"]
+[editable path="ice_block"]
